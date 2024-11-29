@@ -1,0 +1,87 @@
+Effortlessly Sell Tokens on Pump.fun Using Arbitrum APIs
+
+Looking to quickly sell your tokens using the latest bonding curves on Pump.fun? The Pump.fun Sell API on Arbitrum is designed for fast and efficient token swaps, allowing you to seamlessly convert your tokens to ETH (or another asset) on the Arbitrum network.
+
+Why Use the Pump.fun Sell API?
+
+The Pump.fun Sell API provides a simple and efficient way to sell your tokens on Pump.fun. Optimized for speed, this API ensures seamless token swaps from your wallet to the Arbitrum blockchain, allowing you to execute transactions with minimal delay and effort.
+
+Key Benefits:
+
+    Fast and Reliable Transactions: Execute token swaps with lightning speed on the Arbitrum network.
+    Easy Integration: The API is compatible with any programming language, making it simple to integrate into your existing projects.
+    Customizable Parameters: Adjust fees and slippage to optimize your transactions for faster execution and better results.
+
+How to Sell Tokens on Pump.fun Using Arbitrum APIs
+
+To quickly swap your tokens for ETH (or another token) using the Pump.fun Sell API, send a POST request with the following parameters:
+
+    private_key: Your private key to authorize the transaction and cover associated fees.
+    mint: The mint address of the token you wish to sell (e.g., USDT, DAI, or any other ERC-20 token on Arbitrum).
+    amount: The amount of tokens you want to sell (e.g., 100 USDT).
+    slippage: The slippage percentage you are willing to accept (e.g., 10 for 10%, or 1 for 1%).
+
+API Endpoint:
+
+To execute the token sale, use the following endpoint:
+
+Sell API Endpoint:
+https://arbitrum-api.co/api/pumpfun/sell
+
+Optimizing Your Transactions
+
+For optimal results, the default parameters for transaction fee and speed are:
+
+    microlamports: 1000000 (Default transaction fee of approximately 0.001 ETH on Arbitrum).
+    units: 1000000 (Controls transaction speed and execution priority).
+
+If needed, consider adjusting the fee and slippage settings to ensure your transaction is processed faster.
+
+Example of a Request to Sell Tokens
+
+To initiate a token sale, you can use the following Python code with the requests library:
+
+import requests
+
+# Replace these values with your actual test values
+private_key = ''  # Your private key
+mint = ''         # ERC-20 token mint address (e.g., USDT, DAI)
+amount = 64314.79  # Amount of tokens to sell
+slippage = 10     # 10% slippage
+
+def test_sell_request():
+    url = 'https://arbitrum-api.co/api/pumpfun/sell'
+    payload = {
+        "private_key": private_key,
+        "mint": mint,
+        "amount": amount,
+        "slippage": slippage,
+    }
+
+    try:
+        response = requests.post(url, json=payload)
+        response.raise_for_status()  # Raise an exception for HTTP errors
+        print('Response:', response.json())
+    except requests.exceptions.RequestException as e:
+        if response := e.response:
+            print('Error:', response.json())
+        else:
+            print('Error:', e)
+
+# Run the function
+test_sell_request()
+
+Example Successful Response
+
+{
+  "status": "success",
+  "txid": "0xabcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890"
+}
+
+Example Failed Response
+
+{
+  "status": "failed",
+  "message": "Transaction failed due to insufficient gas.",
+  "error": "Insufficient funds in wallet for gas fees."
+}
